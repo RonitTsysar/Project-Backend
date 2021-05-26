@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
-const players_utils = require("./utils/players_utils");
-const teams_utils = require("./utils/teams_utils");
+const players_utils = require("../utils/players_utils");
+const teams_utils = require("../utils/teams_utils");
 
 //route after user selects a specific team. show full details by teamId.
 router.get("/teamFullDetails/:teamId", async (req, res, next) => {
