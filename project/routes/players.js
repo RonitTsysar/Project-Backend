@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
-const DButils = require("./utils/DButils");
-const players_utils = require("./utils/players_utils");
+const DButils = require("../utils/DButils");
+const players_utils = require("../utils/players_utils");
 
 //route after user selects a specific player. show full details by playerId.
 

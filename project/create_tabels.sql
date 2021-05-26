@@ -4,10 +4,10 @@
 -- CREATE TABLE dbo.users
 -- (
 --     userId INTEGER IDENTITY(1,1) NOT NULL,
---     username [NVARCHAR](50) NOT NULL,
---     firstname [NVARCHAR](50)  NOT NULL,
---     lastname [NVARCHAR](50)  NOT NULL,
---     country [NVARCHAR](50)  NOT NULL,
+--     username VARCHAR(50) NOT NULL,
+--     firstname VARCHAR(50)  NOT NULL,
+--     lastname VARCHAR(50)  NOT NULL,
+--     country VARCHAR(50)  NOT NULL,
 --     password varchar(255) NOT NULL,
 --     email varchar(255) NOT NULL,
 --     image varchar(255),
@@ -23,11 +23,11 @@
 --     matchId INT NOT NULL PRIMARY KEY, -- primary key column
 --     matchDate DATE NOT NULL,
 --     matchHour TIME NOT NULL,
---     hostTeam [NVARCHAR](50)  NOT NULL,
---     guestTeam [NVARCHAR](50)  NOT NULL,
---     staduim [NVARCHAR](50) NOT NULL,
---     refereeID [NVARCHAR](50) NOT NULL,
---     score [NVARCHAR](50),
+--     hostTeam VARCHAR(50)  NOT NULL,
+--     guestTeam VARCHAR(50)  NOT NULL,
+--     staduim VARCHAR(50) NOT NULL,
+--     refereeID VARCHAR(50) NOT NULL,
+--     score VARCHAR(50),
 -- );
 -- GO
 
@@ -36,13 +36,16 @@
 -- GO
 -- CREATE TABLE dbo.eventLog
 -- (   
---     matchId INT NOT NULL,    
+--     matchId INT NOT NULL,
+--     eventId INT NOT NULL,
+--     event_type varchar (20) NOT NULL CHECK (event_type IN('Goal', 'Offside', 'Fault', 'YellowCard', 'RedCard', 'Injury', 'Sub')),
 --     eventDate DATE NOT NULL,
 --     eventHour TIME NOT NULL,
---     eventDescription [NVARCHAR](50) NOT NULL,
+--     minuteInGame INT NOT NULL,
+--     eventDescription VARCHAR(200) NOT NULL,
 --     CONSTRAINT matchId FOREIGN KEY (matchId)
 --     REFERENCES dbo.matches(matchId),
---     CONSTRAINT PK_matchId_hour PRIMARY KEY (matchId, eventHour)
+--     CONSTRAINT PK_matchId_hour PRIMARY KEY (matchId, eventId)
 -- );
 -- GO
 
@@ -54,6 +57,40 @@
 --     userId INT NOT NULL, 
 --     matchId INT NOT NULL,
 --     PRIMARY KEY (userId, matchId)
+-- );
+-- GO
+
+-- PROJECT - create League table --
+IF OBJECT_ID('dbo.League', 'U') IS NOT NULL
+DROP TABLE dbo.leagues
+GO
+CREATE TABLE dbo.leagues
+(
+    leagueId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    leagueName VARCHAR (50) NOT NULL, 
+    country VARCHAR (50) NOT NULL
+);
+GO
+
+-- PROJECT - create REFEREE table --
+IF OBJECT_ID('dbo.referees', 'U') IS NOT NULL
+DROP TABLE dbo.referees
+GO
+CREATE TABLE dbo.referees
+(
+    refereeId INT FOREIGN KEY REFERENCES dbo.users(userId) NOT NULL PRIMARY KEY,
+    qualification VARCHAR(50) NOT NULL CHECK(qualification IN ('Basic', 'Advanced', 'Pro')),
+    leagueId INT FOREIGN KEY REFERENCES dbo.leagues(leagueId) NOT NULL
+);
+GO
+
+-- PROJECT - create FAR table --
+-- IF OBJECT_ID('dbo.FARs', 'U') IS NOT NULL
+-- DROP TABLE dbo.FARs
+-- GO
+-- CREATE TABLE dbo.FARs
+-- (
+--     FARId INT FOREIGN KEY REFERENCES dbo.users(userId) NOT NULL PRIMARY KEY
 -- );
 -- GO
 

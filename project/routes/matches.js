@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const matches_utils = require("./utils/matches_utils");
+const matches_utils = require("../utils/matches_utils");
 
 //route for search of a past games by stage
 router.get("/searchMatches", async (req, res, next) => {

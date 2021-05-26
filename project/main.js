@@ -1,5 +1,5 @@
 //#region global imports
-const DButils = require("./routes/utils/DButils");
+const DButils = require("../project/utils/DButils");
 const axios = require("axios");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
@@ -97,4 +97,3 @@ process.on("SIGINT", function () {
     server.close(() => console.log("server closed"));
   }
 });
-//

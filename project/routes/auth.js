@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
-const DButils = require("../routes/utils/DButils");
+const DButils = require("../utils/DButils");
 const bcrypt = require("bcryptjs");
+const auth_domain = require("../domain/auth_domain")
 
 router.post("/Register", async (req, res, next) => {
   try {
@@ -38,16 +39,10 @@ router.post("/Register", async (req, res, next) => {
 
 router.post("/Login", async (req, res, next) => {
   try {
-    const user = (
-      await DButils.execQuery(
-        `SELECT * FROM dbo.users WHERE username = '${req.body.username}'`
-      )
-    )[0];
-    // user = user[0];
-    console.log(user);
 
-    // check that username exists & the password is correct
-    if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
+    const user = await auth_domain.loginUser(req.body.username, req.body.password)
+
+    if (user == null){
       throw { status: 401, message: "Username or Password incorrect" };
     }
 
