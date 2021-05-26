@@ -15,19 +15,22 @@
     "nodemon": "^2.0.7",
     "path": "^0.12.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^27.0.1"
+  },
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest",
+    "start": "node project/main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Web-Development-Environments-2021/assignment-3-2-205413149_316612803_312198310.git"
+    "url": "git+https://github.com/RonitTsysar/Project-Backend"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Web-Development-Environments-2021/assignment-3-2-205413149_316612803_312198310/issues"
+    "url": "git+https://github.com/RonitTsysar/Project-Backend/issues"
   },
-  "homepage": "https://github.com/Web-Development-Environments-2021/assignment-3-2-205413149_316612803_312198310#readme"
+  "homepage": "git+https://github.com/RonitTsysar/Project-Backend#readme"
 }
