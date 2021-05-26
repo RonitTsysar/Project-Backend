@@ -1,0 +1,33 @@
+{
+  "name": "assignment-3-2-205413149_316612803_312198310",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "client-sessions": "^0.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "mssql": "^7.1.0",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Web-Development-Environments-2021/assignment-3-2-205413149_316612803_312198310.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Web-Development-Environments-2021/assignment-3-2-205413149_316612803_312198310/issues"
+  },
+  "homepage": "https://github.com/Web-Development-Environments-2021/assignment-3-2-205413149_316612803_312198310#readme"
+}
