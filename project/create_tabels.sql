@@ -103,27 +103,36 @@
 
 -------------------------------------------insertion section------------------------------------------------------------
 -- INSERT INTO dbo.matches ( stage, matchDate, matchHour , hostTeam , guestTeam , stadium , refereeID, score)
--- VALUES (10, '01/01/2021','19:00', 'Charlton Athletic', 'Sunderland', 'Metropolitano', 6, '0-3');
+-- VALUES (10, '2021-01-01','19:00', 'Charlton Athletic', 'Sunderland', 'Metropolitano', 6, '0-3');
 
 -- INSERT INTO dbo.matches (matchDate, stage, matchHour , hostTeam , guestTeam , staduim , refereeID, score)
--- VALUES (10, '02/01/2021', '21:00', 'Blackburn Rovers', 'West Ham United', 'Teddy', 7, '2-1');
+-- VALUES (10, '2021-01-02', '21:00', 'Blackburn Rovers', 'West Ham United', 'Teddy', 7, '2-1');
 
 -- INSERT INTO dbo.matches (stage, matchDate, matchHour , hostTeam , guestTeam , staduim , refereeID)
--- VALUES (10, '10/07/2021', '19:00', 'West Ham United', 'Charlton Athletic', 'Camp Nou', 8);
+-- VALUES (10, '2021-07-11', '19:00', 'West Ham United', 'Charlton Athletic', 'Camp Nou', 8);
 
 -- INSERT INTO dbo.matches (stage, matchDate, matchHour , hostTeam , guestTeam , staduim , refereeID)
--- VALUES (10, '10/07/2021', '20:00', 'Sunderland', 'Blackburn Rovers', 'Maracana', 9);
-
--- UPDATE dbo.matches
--- SET stage = 10;
+-- VALUES (10, '2021-07-10', '20:00', 'Sunderland', 'Blackburn Rovers', 'Maracana', 9);
 
 
--- -- INSERT INTO dbo.eventLog (eventId, event_type, eventDate , eventHour ,minuteInGame, eventDescription)
--- -- VALUES (1,'Goal' , '12/12/2021','17:05', 78,'Goal Ronaldo');
+-- -- INSERT INTO dbo.eventLog (1, event_type, eventDate , eventHour ,minuteInGame, eventDescription)
+-- -- VALUES (1, 'Goal' , '2021-01-01','19:05', 78, 'Goal Ronaldo');
 
--- INSERT INTO dbo.eventLog (matchId, eventDate , eventHour , eventDescription)
--- VALUES (1,'12/12/2021','17:05','Goal Ronaldo');
+-- -- INSERT INTO dbo.eventLog (1, event_type, eventDate , eventHour ,minuteInGame, eventDescription)
+-- -- VALUES (1, 'Goal' , '2021-01-01','19:30', 78, 'Goal Messi');
+
+-- -- INSERT INTO dbo.eventLog (1, event_type, eventDate , eventHour ,minuteInGame, eventDescription)
+-- -- VALUES (1, 'Goal' , '2021-01-01','19:55', 78, 'Goal Buzaglo');
+
+-- -- INSERT INTO dbo.eventLog (1, event_type, eventDate , eventHour ,minuteInGame, eventDescription)
+-- -- VALUES (2, 'Goal' , '2021-01-02','21:30', 78, 'Goal Auzil');
+
+-- -- INSERT INTO dbo.eventLog (1, event_type, eventDate , eventHour ,minuteInGame, eventDescription)
+-- -- VALUES (2, 'Goal' , '2021-01-02','21:35', 78, 'Goal Pele');
+
+-- -- INSERT INTO dbo.eventLog (1, event_type, eventDate , eventHour ,minuteInGame, eventDescription)
+-- -- VALUES (2, 'Goal' , '2021-01-02','21:45', 78, 'Goal Tevez');
 
 
--- INSERT INTO dbo.eventLog (matchId, eventDate , eventHour , eventDescription)
--- VALUES (10,'01/01/2021','21:58','Goal Jarrod Bowen');
+-- INSERT INTO dbo.FARs (FARId)
+-- VALUES (2)

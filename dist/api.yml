@@ -258,6 +258,28 @@ paths:
                   $ref: "#/components/schemas/Event"
         "404":
           description: Match events not found
+  /far/addMatch:
+    post:
+      summary: add match to macthes table
+      description: useful for the matches assignment
+      tags:
+        - Matches
+        - FAR
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                match:
+                  type: array
+                  items:
+                  $ref: "#/components/schemas/MatchPOST"
+      responses:
+        "200":
+          description: Match added successfully
+        "500":
+          description: user is not in FAR table
 components:
   schemas:
     User:
@@ -452,14 +474,18 @@ components:
           type: integer
           description: match id. no need to supply - when added to DB. added automatically.
           example: 1
+        stage:
+          type: integer
+          description: stage in which the match occur in
+          example: 10
         matchDate:
           type: string
           description: match date 
-          example: '2021-01-01T00:00:00.000Z'
+          example: '2021-01-01'
         matchHour:
           type: string
           description: match hour 
-          example: 19:00
+          example: '19:00'
         hostTeam:
           type: string
           description: hosting team
@@ -468,11 +494,47 @@ components:
           type: string
           description: guest team
           example: Sunderland
-        staduim:
+        stadium:
           type: string
           description: host staduim
           example: Metropolitano
-        refereeID:
+        refereeId:
+          type: integer
+          description: referee id
+          example: 6
+        score:
+          type: string
+          description: the match result
+          example: 0-3
+
+    MatchPost:
+      type: object
+      properties:
+        stage:
+          type: integer
+          description: stage in which the match occur in
+          example: 10
+        matchDate:
+          type: string
+          description: match date 
+          example: '2021-01-01'
+        matchHour:
+          type: string
+          description: match hour 
+          example: '19:00'
+        hostTeam:
+          type: string
+          description: hosting team
+          example: Charlton Athletic
+        guestTeam:
+          type: string
+          description: guest team
+          example: Sunderland
+        stadium:
+          type: string
+          description: host staduim
+          example: Metropolitano
+        refereeId:
           type: integer
           description: referee id
           example: 6
@@ -486,7 +548,7 @@ components:
       properties:
         matchId:
           type: integer
-          description: match id. no need to supply - when added to DB. added automatically.
+          description: match id.
           example: 1
         eventId:
           type: integer
@@ -510,7 +572,42 @@ components:
         eventHour:
           type: string
           description: event hour 
-          example: 19:00
+          example: '19:00'
+        minuteInGame:
+          type: int
+          description: minute in game of the event 
+          example: 73
+        eventDescription:
+          type: string
+          description: event description 
+          example: Goal Adam Armstrong
+
+    EventPost:
+      type: object
+      properties:
+        matchId:
+          type: integer
+          description: match id.
+          example: 1        
+        event_type:
+          type: string
+          description: event type as enum
+          enum: 
+            - Goal
+            - offSide
+            - Fault
+            - YellowCard
+            - RedCard
+            - Injury
+            - Sub
+        eventDate:
+          type: string
+          description: event date 
+          example: '2021-01-01T00:00:00.000Z'
+        eventHour:
+          type: string
+          description: event hour 
+          example: '19:00'
         minuteInGame:
           type: int
           description: minute in game of the event 
