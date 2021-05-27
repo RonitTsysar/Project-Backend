@@ -12,7 +12,6 @@ async function loginUser(username, password){
         )
       )[0];
       // user = user[0];
-      console.log(user);
   
       // check that username exists & the password is correct
       if (!user || !bcrypt.compareSync(password, user.password)) {

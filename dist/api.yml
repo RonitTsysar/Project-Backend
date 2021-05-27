@@ -10,6 +10,7 @@ tags:
   - name: Players
   - name: Teams
   - name: Matches
+  - name: FAR
 paths:
   /Register:
     post:
@@ -242,7 +243,7 @@ paths:
         - in: path
           name: matchId
           description: match's id
-          example: 5
+          example: 1
           required: true
           schema:
             type: integer
@@ -449,12 +450,12 @@ components:
       properties:
         matchId:
           type: integer
-          description: match id
-          example: 5
+          description: match id. no need to supply - when added to DB. added automatically.
+          example: 1
         matchDate:
           type: string
           description: match date 
-          example: 01/01/2021
+          example: '2021-01-01T00:00:00.000Z'
         matchHour:
           type: string
           description: match hour 
@@ -479,21 +480,41 @@ components:
           type: string
           description: the match result
           example: 0-3
+
     Event:
       type: object
       properties:
         matchId:
           type: integer
-          description: match id
-          example: 10
+          description: match id. no need to supply - when added to DB. added automatically.
+          example: 1
+        eventId:
+          type: integer
+          description: event id. no need to supply - when added to DB. added automatically.
+          example: 1
+        event_type:
+          type: string
+          description: event type as enum
+          enum: 
+            - Goal
+            - offSide
+            - Fault
+            - YellowCard
+            - RedCard
+            - Injury
+            - Sub
         eventDate:
           type: string
           description: event date 
-          example: 2021-01-01T00:00:00.000Z
+          example: '2021-01-01T00:00:00.000Z'
         eventHour:
           type: string
           description: event hour 
-          example: 1970-01-01T21:33:00.000Z
+          example: 19:00
+        minuteInGame:
+          type: int
+          description: minute in game of the event 
+          example: 73
         eventDescription:
           type: string
           description: event description 
