@@ -46,11 +46,11 @@ exports.execQuery = function (query) {
         return pool.request().query(query);
       })
       .then((result) => {
-        // console.log(result);
         sql.close();
         resolve(result.recordsets[0]);
       })
       .catch((err) => {
+        console.log(err)
         // ... error checks
       });
   });
