@@ -53,6 +53,8 @@ paths:
           #       type: string
           #       example: session=87s97sdhgf279293f8w0e9
             # Note that the Set-Cookie header and securitySchemes are not connected in any way, and the Set-Header definition is for documentation purposes only.
+        "400":
+          description: Bad Request. Wrong Input Parameters
         "401":
           description: Authentication failed
   /logout:
