@@ -7,9 +7,9 @@ const auth_domain = require("../domain/auth_domain")
 router.post("/Register", async (req, res, next) => {
   try {
     // parameters exists
+
     // valid parameters
     // username exists
-
     const users = await DButils.execQuery(
       "SELECT username FROM dbo.users"
     );
@@ -37,12 +37,22 @@ router.post("/Register", async (req, res, next) => {
   }
 });
 
+function checkIfLoginParamsExist(loginObj){
+  if (!('username' in loginObj) || !('password' in loginObj) ){
+    return false;
+  }
+  return true;
+}
+
 router.post("/Login", async (req, res, next) => {
   try {
+    //check Parameters recieved from client
+    if(!checkIfLoginParamsExist(req.body)){
+      throw {status: 400, message: "Bad Request. Wrong Input Parameters"};
+    }
 
     const user = await auth_domain.loginUser(req.body.username, req.body.password)
-
-    if (user == null){
+    if (user === null){
       throw { status: 401, message: "Username or Password incorrect" };
     }
 
