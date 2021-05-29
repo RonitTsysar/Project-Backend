@@ -79,7 +79,7 @@
 -- );
 -- GO
 
--- -- PROJECT - create REFEREE table --
+-- PROJECT - create REFEREE table --
 -- IF OBJECT_ID('dbo.referees', 'U') IS NOT NULL
 -- DROP TABLE dbo.referees
 -- GO
@@ -87,7 +87,7 @@
 -- (
 --     refereeId INT FOREIGN KEY REFERENCES dbo.users(userId) NOT NULL PRIMARY KEY,
 --     qualification VARCHAR(50) NOT NULL CHECK(qualification IN ('Basic', 'Advanced', 'Pro')),
---     leagueId INT FOREIGN KEY REFERENCES dbo.leagues(leagueId) NOT NULL
+--     leagueId INT FOREIGN KEY REFERENCES dbo.leagues(leagueId)
 -- );
 -- GO
 

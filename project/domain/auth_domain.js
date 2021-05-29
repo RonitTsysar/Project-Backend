@@ -6,6 +6,7 @@ const auth_utils = require("../utils/auth_utils");
 params: username, password
 return: boolean
 */
+
 async function loginUser(username, password){
   //Sending request to the Data Layer
   const user = await auth_utils.getUser(username);
