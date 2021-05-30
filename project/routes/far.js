@@ -57,6 +57,8 @@ request should contain:
 {leagueId:217,
 season:'2017/2018',
 policy: {numOfRounds: 10}}
+
+add route to api and delete /far/addMatch route
 */
 router.post("/matchAssignmentAlgorithm", async (req, res, next) => {
     try{      

@@ -10,8 +10,7 @@ async function checkSufficientTeams(leagueId){
 
 async function assignMatches(leagueId, seasonId, numOfRounds){
     const validTeams = await matches_utils.getValidTeamsByLeagueId(leagueId);
-
-    let x = 5;
+    return validTeams;
 }
 
 exports.assignMatches = assignMatches
