@@ -9,7 +9,7 @@ async function checkFarIsValid(userId){
 
 async function addMatch(match){
     //change
-    far_utils.addMatchToDB(match)
+    match_utils.addMatchToDB(match)
 }
 
 async function addReferee(user, referee) {

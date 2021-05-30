@@ -36,7 +36,6 @@ async function getMatchById(matchId) {
   return matches;
 }
 
-
 async function getAllMatchesByIds(matchIds){
   let match_ids_array = [];
   matchIds.map((element) => match_ids_array.push(element.matchId)); //extracting the matches ids into array
@@ -58,10 +57,26 @@ async function getMatchById(matchId) {
   return matches;
 }
 
+async function addMatchToDB(match){
+  await DButils.execQuery(
+      `INSERT INTO matches (stage, matchDate, matchHour , hostTeam , guestTeam , stadium , refereeId, score) VALUES (${match.stage}, N'${match.matchDate}', N'${match.matchHour}', N'${match.hostTeam}', N'${match.guestTeam}', N'${match.stadium}', ${match.refereeId}, N'${match.score}')`
+  )
+}
 
-  exports.getMatchesByStage = getMatchesByStage;
-  exports.getMatchById = getMatchById;
-  exports.getMatchEventByMatch = getMatchEventByMatch;
-  exports.getAllMatchesByIds = getAllMatchesByIds;
+async function checkSufficientTeamsUtils(leagueId){
+  return await DButils.execQuery(
+    `SELECT COUNT(teamId) from teams where teams.leagueId=${leagueId}`)
+}
 
-  // `select matches.matchId ,matches.matchDate ,matches.matchHour ,matches.hostTeam , matches.guestTeam, matches.staduim ,matches.coachID ,matches.score ,eventLog.eventHour as Time,eventLog.eventDescription as Description from matches left join eventLog on matches.matchId = eventLog.matchId`
+async function getValidTeamsByLeagueId(leagueId){
+  return await DButils.execQuery(
+    `SELECT * from teams where teams.leagueId=${leagueId}`)
+}
+
+exports.addMatchToDB = addMatchToDB
+exports.getMatchesByStage = getMatchesByStage;
+exports.getMatchById = getMatchById;
+exports.getMatchEventByMatch = getMatchEventByMatch;
+exports.getAllMatchesByIds = getAllMatchesByIds;
+exports.checkSufficientTeamsUtils = checkSufficientTeamsUtils;
+exports.getValidTeamsByLeagueId = getValidTeamsByLeagueId;

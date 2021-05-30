@@ -37,9 +37,9 @@ router.get("/teamFullDetails/:teamId", async (req, res, next) => {
 //route for search a team by name. returns partial data.
 router.get("/searchTeamByName/:teamName", async (req, res, next) => {
   try{
-      let players = {};
-      players = await teams_utils.getTeamByName(req.params.teamName);
-      res.send(players);
+      let team = {};
+      team = await teams_utils.getTeamByName(req.params.teamName);
+      res.send(team);
 
   } catch(error){
       next(error);
