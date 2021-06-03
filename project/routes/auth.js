@@ -37,9 +37,9 @@ router.post("/Register", async (req, res, next) => {
   }
 });
 
+
 router.post("/Login", async (req, res, next) => {
   try {
-
     const user = await auth_domain.loginUser(req.body.username, req.body.password)
 
     if (user == null){
