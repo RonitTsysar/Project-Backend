@@ -8,8 +8,12 @@ async function checkSufficientTeams(leagueId){
     return true;
 }
 
+//implement match assignment algorithm
 async function assignMatches(leagueId, seasonId, numOfRounds){
     const validTeams = await matches_utils.getValidTeamsByLeagueId(leagueId);
+
+    ///implement algorithm down here
+
     return validTeams;
 }
 
