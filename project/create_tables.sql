@@ -15,15 +15,14 @@
 -- );
 -- GO
 
--- DROP table eventlog
--- drop table matches
-
 -- IF OBJECT_ID('dbo.matches', 'U') IS NOT NULL
 -- DROP TABLE dbo.matches
 -- GO
 -- CREATE TABLE dbo.matches
 -- (
 --     matchId INTEGER IDENTITY(1,1) NOT NULL, -- primary key column
+--     league INT NOT NULL,
+--     season VARCHAR(50) NOT NULL,
 --     stage INT NOT NULL,
 --     matchDate DATE NOT NULL,
 --     matchHour VARCHAR(50) NOT NULL,
@@ -64,8 +63,7 @@
 --     PRIMARY KEY (userId, matchId)
 -- );
 -- GO
-
---------------------------------------------------PROJECT SECTION------------------------------------------------------
+-- ------------------------------------------------PROJECT SECTION------------------------------------------------------
 
 -- -- PROJECT - create League table --
 -- IF OBJECT_ID('dbo.League', 'U') IS NOT NULL
@@ -73,13 +71,13 @@
 -- GO
 -- CREATE TABLE dbo.leagues
 -- (
---     leagueId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+--     leagueId INT NOT NULL PRIMARY KEY,
 --     leagueName VARCHAR (50) NOT NULL, 
 --     country VARCHAR (50) NOT NULL
 -- );
 -- GO
 
--- -- PROJECT - create REFEREE table --
+-- PROJECT - create REFEREE table --
 -- IF OBJECT_ID('dbo.referees', 'U') IS NOT NULL
 -- DROP TABLE dbo.referees
 -- GO
@@ -87,11 +85,11 @@
 -- (
 --     refereeId INT FOREIGN KEY REFERENCES dbo.users(userId) NOT NULL PRIMARY KEY,
 --     qualification VARCHAR(50) NOT NULL CHECK(qualification IN ('Basic', 'Advanced', 'Pro')),
---     leagueId INT FOREIGN KEY REFERENCES dbo.leagues(leagueId) NOT NULL
+--     leagueId INT FOREIGN KEY REFERENCES dbo.leagues(leagueId)
 -- );
 -- GO
 
--- PROJECT - create FAR table --
+-- -- PROJECT - create FAR table --
 -- IF OBJECT_ID('dbo.FARs', 'U') IS NOT NULL
 -- DROP TABLE dbo.FARs
 -- GO
@@ -101,6 +99,16 @@
 -- );
 -- GO
 
+-- IF OBJECT_ID('dbo.teams', 'U') IS NOT NULL
+-- DROP TABLE dbo.teams
+-- GO
+-- CREATE TABLE dbo.teams
+-- (
+--     teamId INT NOT NULL PRIMARY KEY, -- primary key column
+--     name VARCHAR(50) NOT NULL,
+--     leagueId INT FOREIGN KEY REFERENCES dbo.leagues(leagueId) NOT NULL
+-- );
+-- GO
 -------------------------------------------insertion section------------------------------------------------------------
 -- INSERT INTO dbo.matches ( stage, matchDate, matchHour , hostTeam , guestTeam , stadium , refereeID, score)
 -- VALUES (10, '2021-01-01','19:00', 'Charlton Athletic', 'Sunderland', 'Metropolitano', 6, '0-3');
@@ -133,6 +141,27 @@
 -- -- INSERT INTO dbo.eventLog (1, event_type, eventDate , eventHour ,minuteInGame, eventDescription)
 -- -- VALUES (2, 'Goal' , '2021-01-02','21:45', 78, 'Goal Tevez');
 
+-- INSERT INTO leagues (leagueId, leagueName, country)
+-- VALUES (271, 'SuperLiga', 'Denemrk')
 
--- INSERT INTO dbo.FARs (FARId)
--- VALUES (2)
+-- INSERT INTO dbo.FARs (FARId) 
+-- Values (2)
+
+-- INSERT INTO dbo.teams (teamId, name, leagueId)
+-- VALUES (2905, 'AGF', 271)
+
+-- INSERT INTO dbo.teams (teamId, name, leagueId)
+-- VALUES (390, 'SønderjyskE', 271)
+
+-- INSERT INTO dbo.teams (teamId, name, leagueId)
+-- VALUES (1371, 'NY Cosmos', 271)
+
+-- INSERT INTO dbo.teams (teamId, name, leagueId)
+-- VALUES (2356, 'Randers', 271)
+
+-- 2905, 'AGF', 271
+-- 390, 'SønderjyskE', 271
+-- 1371, 'NY Cosmos', 271
+-- 2356, 'Randers', 271
+-- 53, 'Celtic'
+-- 258, 'Livingston'
