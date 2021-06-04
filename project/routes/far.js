@@ -7,7 +7,7 @@ router.use("/", async (req, res, next) => {
     try{
         //check if user has FAR access
         const isValid = await far_domain.checkFarIsValid(req.session.userId);        
-        isValid ? next() : (() => {throw{status: 500, message: "user is not in FAR table"}})
+        isValid ? next() : (() => {throw{status: 500, message: "User must have FAR privilege"}})
 
     } catch(error){
         next(error);
@@ -87,7 +87,7 @@ router.post("/matchAssignmentAlgorithm", async (req, res, next) => {
             }
         }
 
-        const matches = await matches_domain.assignMatches(req.body.leagueId, req.body.season, req.body.policy.numOfRounds)
+        const matches = await matches_domain.assignMatches(req.body.leagueId, req.body.season, req.body.policy.numOfRounds);         
         
 
     } catch(error){
@@ -132,5 +132,5 @@ function checkIfValidParamsExist(body){
     if (!'image_url' in body){return false;}
     if (!'qualification' in body){return false;}
     return true;
-  }
+}
 module.exports = router;

@@ -15,7 +15,7 @@ async function addMatch(match){
 async function addReferee(user, referee) {
     await users_utils.addUserToDB(user);
     
-    userId = await users_utils.getUserId(user.username);
+    let userId = await users_utils.getUserId(user.username);
     referee.refereeId = userId[0].userId;
 
     await referee_utils.addRefereeToDB(referee);
