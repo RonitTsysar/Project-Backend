@@ -1,6 +1,6 @@
 const auth_domain = require("../domain/auth_domain");
 
-// *****************************************UNIT TESTING *******************************************************
+// *****************************************ACCEPTANCE TESTING - LOGIN USE CASE *******************************************************
 
 test('Check a successful login of a registered user', async () => {
     let userName = "danaKlim";

@@ -12,9 +12,7 @@ async function getUser(username){
           `SELECT * FROM dbo.users WHERE username = '${username}'`
         )
       )[0];
- 
     return user;
 }
-
 
 exports.getUser = getUser;
