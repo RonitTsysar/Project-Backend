@@ -22,3 +22,6 @@ test('Check an unsuccessful login of a registered user', async () => {
     const user = await auth_domain.loginUser(userName, password);
     expect(user).toBeNull();
 });
+
+
+
