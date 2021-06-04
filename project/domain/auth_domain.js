@@ -17,7 +17,5 @@ async function loginUser(username, password){
   return user;
 }
 
-// let user = loginUser('danaKlim', 'dana123');
-// console.log(user);
 
 exports.loginUser = loginUser;

@@ -1,18 +1,27 @@
 const auth_domain = require("../domain/auth_domain");
 
-test('check login successfull', async () => {
-    let username = 'danaKlim';
-    let password = 'dana123';
-    expect(
-        await auth_domain.loginUser(username, password)
-    ).not.toBeNull();
+// *****************************************ACCEPTANCE TESTING - LOGIN USE CASE *******************************************************
+
+test('Check a successful login of a registered user', async () => {
+    let userName = "danaKlim";
+    let password = "dana123";
+    const user = await auth_domain.loginUser(userName, password);
+    expect(user).not.toBeNull();
 });
 
-test('check login failed', async () => {
-    let username = 'roydor';
-    let password = 'roy123';
-    expect(
-        await auth_domain.loginUser(username, password)
-    ).toBeNull();
+test('Check an unsuccessful login of a registered user', async () => {
+    let userName = "danaKlim";
+    let password = "dana1234";
+    const user = await auth_domain.loginUser(userName, password);
+    expect(user).toBeNull();
 });
+
+test('Check an unsuccessful login of a registered user', async () => {
+    let userName = "danaKlimenko";
+    let password = "dana123";
+    const user = await auth_domain.loginUser(userName, password);
+    expect(user).toBeNull();
+});
+
+
 
