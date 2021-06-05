@@ -56,7 +56,7 @@ router.post("/addMatch", async (req, res, next) => {
 
 /*
 request should contain:
-{leagueId:217,
+{leagueId:271,
 season:'2017/2018',
 policy: {numOfRounds: 10}}
 
@@ -67,7 +67,8 @@ router.post("/matchAssignmentAlgorithm", async (req, res, next) => {
         
         if(!('leagueId' in req.body) ||
         !('season' in req.body) ||
-        !('policy' in req.body)){
+        !('policy' in req.body) ||
+        !(/\d\d\d\d\/\d\d\d\d/.test(req.body.season))){
             throw{status: 400,message: "wrong input parameters."}
         }
 

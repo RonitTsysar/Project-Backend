@@ -3,7 +3,8 @@ const referee_utils = require("../utils/referee_utils");
 
 async function checkSufficientTeams(leagueId){
     const numOfTeams = await matches_utils.checkSufficientTeamsUtils(leagueId);
-    if (numOfTeams < 2){
+    let count = numOfTeams['0']['']
+    if (count < 2 || count % 2 == 1){
         return false;
     }
     return true;
@@ -55,6 +56,7 @@ async function assignMatches(leagueId, season, numOfRounds){
 /*
 make all possible pairs of the teams.
 then, order them in a way that no team will play twice in each stage.
+no team will play against itself.
 */
 function makePairs(validTeams){
     let pairs = [];
@@ -115,7 +117,7 @@ function makeDates(numOfRounds, year, numOfMatchesEachRound, amountOfMatchesEach
             
             if (date.getHours() == 22 || (j % amountOfMatchesEachDay == 0 && j != 0)){//no team will play twicw a day. or past the hour 22:00.
                 date.setDate(date.getDate() + 1);
-                date.setHours(14,00,00);
+                date.setHours(14);
                 numOfDays -= 1;
             }
 
@@ -123,7 +125,7 @@ function makeDates(numOfRounds, year, numOfMatchesEachRound, amountOfMatchesEach
         }
         date = new Date(date.getTime());
         date.setDate(date.getDate() + numOfDays);
-        date.setHours(12,00,00);
+        date.setHours(12);
         numOfDays = 7;
     }
     dates.shift()
@@ -148,3 +150,4 @@ exports.assignReferee = assignReferee
 exports.checkIsValidMatch = checkIsValidMatch
 exports.assignMatches = assignMatches
 exports.checkSufficientTeams = checkSufficientTeams
+exports.makePairs = makePairs
