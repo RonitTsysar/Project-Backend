@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const far_domain = require("../domain/far_domain");
 const matches_domain = require("../domain/matches_domain");
+const referee_domain = require("../domain/referee_domain");
 
 router.use("/", async (req, res, next) => {
     try{
@@ -97,12 +98,12 @@ router.post("/matchAssignmentAlgorithm", async (req, res, next) => {
 
 router.post("/addReferee", async (req, res, next) => {
     try {
-        if(!checkIfValidParamsExist(req.body)){
+        if(!checkValidParamsAddReferee(req.body)){
             throw {status: 400, message: "Bad Request. Wrong Input Parameters"};
         }
         
         const{username, firstname, lastname, country, password, email, image_url, qualification} = req.body
-        await far_domain.addReferee(
+        result = await far_domain.addReferee(
             {
                 username: username, 
                 firstname: firstname, 
@@ -114,15 +115,46 @@ router.post("/addReferee", async (req, res, next) => {
             },
             {
                 qualification: qualification
-            } 
+            }
         )
-        res.status(201).send("referee created");
+        res.status(201).send(result);
     } catch (error) {
         next(error);
       }
 })
 
-function checkIfValidParamsExist(body){
+router.use("/scheduleReferee", async (req, res, next) => {
+    try{
+        isValidRef = await referee_domain.checkIsValidReferee(req.body.refereeId);
+        isValidMatch = await matches_domain.checkIsValidMatch(req.body.matchId);
+
+        if (isValidRef && isValidMatch) {
+            next();
+        } 
+        else {
+            throw{status: 500, message: "refereeId does not exist or matchId does not exist"}
+        }
+    } catch(error){
+        next(error);
+    }
+})
+
+router.post("/scheduleReferee", async (req, res, next) => {
+    try {
+        if(!checkValidParamsScheduleReferee(req.body)){
+            throw {status: 400, message: "Bad Request. Wrong Input Parameters"};
+        }
+        
+        const{refereeId, matchId} = req.body
+        await matches_domain.assignReferee(matchId, refereeId);
+        res.status(200).send("referee successfully assigned to a match");
+
+    } catch (error) {
+        next(error);
+      }
+})
+
+function checkValidParamsAddReferee(body){
     if (!'username' in body){return false;}
     if (!'firstname' in body){return false;}
     if (!'lastname' in body){return false;}
@@ -131,6 +163,12 @@ function checkIfValidParamsExist(body){
     if (!'email' in body){return false;}
     if (!'image_url' in body){return false;}
     if (!'qualification' in body){return false;}
+    return true;
+}
+
+function checkValidParamsScheduleReferee(body){
+    if (!'refereeId' in body){return false;}
+    if (!'matchId' in body){return false;}
     return true;
 }
 module.exports = router;

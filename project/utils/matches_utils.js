@@ -16,18 +16,6 @@ async function getMatchEventByMatch(matchId) {
   return events;
 }
 
-async function getAllMatchesByIds(matchIds){
-  let match_ids_array = [];
-  matchIds.map((element) => match_ids_array.push(element.matchId)); //extracting the matches ids into array
-  let results = [];
-  match_ids_array.map((id) =>{
-    results.push(getMatchById(id));      
-    });
-  let matches_info = await Promise.all(results);
-
-  return matches_info
-}
-
 async function getMatchById(matchId) {
   const matches = await DButils.execQuery(
     `select * from matches where matches.matchId=${matchId}`
@@ -45,16 +33,6 @@ async function getAllMatchesByIds(matchIds){
     });
   let matches_info = await Promise.all(results);
   return matches_info
-}
-
-async function getMatchById(matchId) {
-  const matches = await DButils.execQuery(
-    `select * from matches where matches.matchId=${matchId}`
-    
-  );
-
-  console.log(matches)
-  return matches;
 }
 
 async function addMatchToDB(match){
@@ -73,6 +51,41 @@ async function getValidTeamsByLeagueId(leagueId){
     `SELECT * from teams where teams.leagueId=${leagueId}`)
 }
 
+async function getAllMatches() {
+  const matches = await DButils.execQuery(
+    `select * from matches`
+  );
+  return matches;
+}
+
+async function checkIsValidMatch(matchId){
+  if(matchId === undefined){
+      return false;
+  }
+
+  const match = await DButils.execQuery(
+      `select * from matches where matchId=${matchId}`
+  )
+  if(match[0] === undefined){
+      return false;
+  }
+  return true;
+}
+
+async function assignReferee(matchId, refereeId){
+  try {
+    await DButils.execQuery(
+      `UPDATE matches
+      SET refereeId=${refereeId}
+      WHERE matchId=${matchId}`);
+  } catch (error) {
+    throw (error);
+  }
+}
+
+exports.assignReferee = assignReferee;
+exports.checkIsValidMatch = checkIsValidMatch;
+exports.getAllMatches = getAllMatches;
 exports.addMatchToDB = addMatchToDB
 exports.getMatchesByStage = getMatchesByStage;
 exports.getMatchById = getMatchById;

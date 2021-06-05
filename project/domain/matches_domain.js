@@ -17,5 +17,20 @@ async function assignMatches(leagueId, seasonId, numOfRounds){
     return validTeams;
 }
 
+async function checkIsValidMatch(matchId){
+    return await matches_utils.checkIsValidMatch(matchId)
+}
+
+async function assignReferee(matchId, refereeId){
+    try{
+        await matches_utils.assignReferee(matchId, refereeId);
+    }
+    catch (error) {
+        throw (error);
+      }
+}
+
+exports.assignReferee = assignReferee
+exports.checkIsValidMatch = checkIsValidMatch
 exports.assignMatches = assignMatches
 exports.checkSufficientTeams = checkSufficientTeams

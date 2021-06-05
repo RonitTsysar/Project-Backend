@@ -13,4 +13,18 @@ async function addRefereeToDB(referee){
       }
 }
 
+async function checkIsValidReferee(refereeId){
+  if(refereeId === undefined){
+      return false;
+  }
+  const referee = await DButils.execQuery(
+      `select * from referees where refereeId=${refereeId}`
+  )
+  if(referee[0] === undefined){
+      return false;
+  }
+  return true;
+}
+
+exports.checkIsValidReferee = checkIsValidReferee;
 exports.addRefereeToDB = addRefereeToDB;
