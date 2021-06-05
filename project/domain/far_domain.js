@@ -1,6 +1,7 @@
 const far_utils = require("../utils/far_utils");
 const users_utils = require("../utils/users_utils");
 const referee_utils = require("../utils/referee_utils");
+const matches_utils = require("../utils/matches_utils");
 
 async function checkFarIsValid(userId){
     //chek if farId in FAR table
@@ -13,12 +14,23 @@ async function addMatch(match){
 }
 
 async function addReferee(user, referee) {
-    await users_utils.addUserToDB(user);
+    try {
+        await users_utils.addUserToDB(user);
+        let userId = await users_utils.getUserId(user.username);
+        referee.refereeId = userId[0].userId;
     
-    let userId = await users_utils.getUserId(user.username);
-    referee.refereeId = userId[0].userId;
+        await referee_utils.addRefereeToDB(referee);
+        matches = await matches_utils.getAllMatches();
 
-    await referee_utils.addRefereeToDB(referee);
+        res = {
+            refereeId: referee.refereeId,
+            matches: matches
+        }
+        return res
+    }
+    catch (error) {
+        throw (error);
+      }
 }
 
 exports.addReferee = addReferee;
