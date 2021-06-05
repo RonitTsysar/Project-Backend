@@ -32,8 +32,8 @@ async function assignMatches(leagueId, season, numOfRounds){
             let match = {
                             league: leagueId,
                             season: season,
-                            stage: (i % numOfRounds) + 1,
-                            matchDateTime: dates[i].toISOString(),
+                            stage: Math.floor(i / amountOfMatchesEachRound) + 1,
+                            matchDateTime: JSON.stringify(dates[i]),
                             hostTeam: teamPairs[i % teamPairs.length][0], 
                             guestTeam: teamPairs[i % teamPairs.length][1], 
                             stadium: stadiums[i % stadiums.length], 
@@ -54,13 +54,12 @@ async function assignMatches(leagueId, season, numOfRounds){
 
 /*
 make all possible pairs of the teams.
-then, orders them in a way that no team will play twice in each stage.
+then, order them in a way that no team will play twice in each stage.
 */
 function makePairs(validTeams){
     let pairs = [];
     let teamNames = [];
     
-
     for(let i = 0; i < validTeams.length; i++){
         teamNames.push(validTeams[i].name);
     }
@@ -99,7 +98,8 @@ function makePairs(validTeams){
 /*
 games start time: 14:00 to 20:00.
 if passed, 20:00, the game will move to the next day.
-each stage will be a wekk a part.
+each stage will be a week a part.
+no team will play twicw a day.
 */
 function makeDates(numOfRounds, year, numOfMatchesEachRound, amountOfMatchesEachDay){
     let dates = [];
@@ -113,7 +113,7 @@ function makeDates(numOfRounds, year, numOfMatchesEachRound, amountOfMatchesEach
             date = new Date(date.getTime());
             date.setTime(date.getTime() + twoHours);
             
-            if (date.getHours() == 22 || (j % amountOfMatchesEachDay == 0 && j != 0)){
+            if (date.getHours() == 22 || (j % amountOfMatchesEachDay == 0 && j != 0)){//no team will play twicw a day. or past the hour 22:00.
                 date.setDate(date.getDate() + 1);
                 date.setHours(14,00,00);
                 numOfDays -= 1;
