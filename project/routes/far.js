@@ -8,8 +8,12 @@ router.use("/", async (req, res, next) => {
     try{
         //check if user has FAR access
         const isValid = await far_domain.checkFarIsValid(req.session.userId);        
-        isValid ? next() : (() => {throw{status: 500, message: "User must have FAR privilege"}})
-
+        if(!isValid){
+            throw{status: 500, message: "User must have FAR privileges"};
+        }
+        
+        next();
+        
     } catch(error){
         next(error);
     }
@@ -24,10 +28,7 @@ router.post("/addMatch", async (req, res, next) => {
         !('guestTeam' in req.body) ||
         !('stadium' in req.body) ||
         !('refereeId' in req.body)){
-            throw{
-                status: 400,
-                message: "wrong object keys supplied"
-            }
+            throw{status: 400,message: "wrong object keys supplied"}
         }
 
         let score = null;
@@ -55,7 +56,7 @@ router.post("/addMatch", async (req, res, next) => {
 
 /*
 request should contain:
-{leagueId:217,
+{leagueId:271,
 season:'2017/2018',
 policy: {numOfRounds: 10}}
 
@@ -66,30 +67,22 @@ router.post("/matchAssignmentAlgorithm", async (req, res, next) => {
         
         if(!('leagueId' in req.body) ||
         !('season' in req.body) ||
-        !('policy' in req.body)){
-            throw{
-                status: 400,
-                message: "wrong input parameters."
-            }
+        !('policy' in req.body) ||
+        !(/\d\d\d\d\/\d\d\d\d/.test(req.body.season))){
+            throw{status: 400,message: "wrong input parameters."}
         }
 
         if(!('numOfRounds' in req.body.policy)){
-            throw{
-                status: 400,
-                message: "policy is expected."
-            }
+            throw{status: 400, message: "policy is expected."}
         }
 
         const isValid = matches_domain.checkSufficientTeams(req.body.leagueId)
         if(!isValid){
-            throw{
-                status: 409,
-                message: "2 teams of the same league and season are required in the DB."
-            }
+            throw{status: 409,message: "2 teams of the same league are required in the DB."}
         }
 
-        const matches = await matches_domain.assignMatches(req.body.leagueId, req.body.season, req.body.policy.numOfRounds);         
-        
+        await matches_domain.assignMatches(req.body.leagueId, req.body.season, req.body.policy.numOfRounds);
+        res.status(200).send("Matches table created");
 
     } catch(error){
         next(error);

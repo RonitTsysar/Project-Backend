@@ -26,5 +26,19 @@ async function checkIsValidReferee(refereeId){
   return true;
 }
 
-exports.checkIsValidReferee = checkIsValidReferee;
+async function getRefereesIds(){
+  try {
+    const ids = await DButils.execQuery(
+        `SELECT refereeId from referees`
+      );
+
+    return ids
+}
+catch (error) {
+    throw(error);
+  }
+}
+
 exports.addRefereeToDB = addRefereeToDB;
+exports.getRefereesIds = getRefereesIds;
+exports.checkIsValidReferee = checkIsValidReferee;

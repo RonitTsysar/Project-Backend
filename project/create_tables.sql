@@ -24,8 +24,7 @@
 --     league INT NOT NULL,
 --     season VARCHAR(50) NOT NULL,
 --     stage INT NOT NULL,
---     matchDate DATE NOT NULL,
---     matchHour VARCHAR(50) NOT NULL,
+--     eventDateTime VARCHAR(50) NOT NULL,
 --     hostTeam VARCHAR(50)  NOT NULL,
 --     guestTeam VARCHAR(50)  NOT NULL,
 --     stadium VARCHAR(50) NOT NULL,
@@ -43,8 +42,7 @@
 --     matchId INT NOT NULL,
 --     eventId INT IDENTITY(1,1) NOT NULL, 
 --     event_type VARCHAR (20) NOT NULL CHECK (event_type IN('Goal', 'Offside', 'Fault', 'YellowCard', 'RedCard', 'Injury', 'Sub')),
---     eventDate DATE NOT NULL,
---     eventHour VARCHAR(50) NOT NULL,
+--     eventDateTime VARCHAR(50) NOT NULL,
 --     minuteInGame INT NOT NULL,
 --     eventDescription VARCHAR(200) NOT NULL,
 --     CONSTRAINT matchId FOREIGN KEY (matchId)
@@ -165,3 +163,8 @@
 -- 2356, 'Randers', 271
 -- 53, 'Celtic'
 -- 258, 'Livingston'
+
+-- DELETE FROM matches WHERE refereeId=21
+
+-- SELECT * FROM matches
+-- ORDER BY stage;

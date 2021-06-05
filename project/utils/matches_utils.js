@@ -36,9 +36,14 @@ async function getAllMatchesByIds(matchIds){
 }
 
 async function addMatchToDB(match){
-  await DButils.execQuery(
-      `INSERT INTO matches (stage, matchDate, matchHour , hostTeam , guestTeam , stadium , refereeId, score) VALUES (${match.stage}, N'${match.matchDate}', N'${match.matchHour}', N'${match.hostTeam}', N'${match.guestTeam}', N'${match.stadium}', ${match.refereeId}, N'${match.score}')`
-  )
+  try{
+    await DButils.execQuery(
+        `INSERT INTO matches (league, season, stage, eventDateTime , hostTeam , guestTeam , stadium , refereeId) VALUES (${match.league}, N'${match.season}', ${match.stage}, N'${match.matchDateTime}', N'${match.hostTeam}', N'${match.guestTeam}', N'${match.stadium}', ${match.refereeId})`
+    )
+  }
+  catch (error) {
+    throw(error);
+  }
 }
 
 async function checkSufficientTeamsUtils(leagueId){
@@ -48,7 +53,7 @@ async function checkSufficientTeamsUtils(leagueId){
 
 async function getValidTeamsByLeagueId(leagueId){
   return await DButils.execQuery(
-    `SELECT * from teams where teams.leagueId=${leagueId}`)
+    `SELECT name from teams where teams.leagueId=${leagueId}`)
 }
 
 async function getAllMatches() {

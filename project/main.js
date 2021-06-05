@@ -86,7 +86,7 @@ app.use("/far", far);
 app.use(auth);
 
 app.use(function (err, req, res, next) {
-  console.error(err);
+  // console.error(err);
   res.status(err.status || 500).send(err.message);
 });
 
@@ -99,3 +99,5 @@ process.on("SIGINT", function () {
     server.close(() => console.log("server closed"));
   }
 });
+
+module.exports =  app;

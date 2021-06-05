@@ -8,8 +8,7 @@ async function checkFarIsValid(userId){
         return await far_utils.checkIfFarIsValid(userId)
 }
 
-async function addMatch(match){
-    //change
+async function addMatch(match){    
     match_utils.addMatchToDB(match)
 }
 
