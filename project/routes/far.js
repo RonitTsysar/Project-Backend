@@ -9,7 +9,7 @@ router.use("/", async (req, res, next) => {
         //check if user has FAR access
         const isValid = await far_domain.checkFarIsValid(req.session.userId);        
         if(!isValid){
-            throw{status: 500, message: "User must have FAR privileges"};
+            throw{status: 401, message: "User must have FAR privileges"};
         }
         
         next();
@@ -110,7 +110,7 @@ router.post("/addReferee", async (req, res, next) => {
                 qualification: qualification
             }
         )
-        res.status(201).send(result);
+        res.status(200).send(result);
     } catch (error) {
         next(error);
       }
@@ -148,14 +148,14 @@ router.post("/scheduleReferee", async (req, res, next) => {
 })
 
 function checkValidParamsAddReferee(body){
-    if (!'username' in body){return false;}
-    if (!'firstname' in body){return false;}
-    if (!'lastname' in body){return false;}
-    if (!'country' in body){return false;}
-    if (!'password' in body){return false;}
-    if (!'email' in body){return false;}
-    if (!'image_url' in body){return false;}
-    if (!'qualification' in body){return false;}
+    if (!('username' in body)){return false;}
+    if (!('firstname' in body)){return false;}
+    if (!('lastname' in body)){return false;}
+    if (!('country' in body)){return false;}
+    if (!('password' in body)){return false;}
+    if (!('email' in body)){return false;}
+    if (!('image_url' in body)){return false;}
+    if (!('qualification' in body)){return false;}
     return true;
 }
 
