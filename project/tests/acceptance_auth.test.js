@@ -32,7 +32,7 @@ describe("POST /Login", () =>{
         
         test("login a registered user - mistake in password param", async () => {
             response = await user.post("/Login").send({
-                userName: 'danaKlim',
+                username: 'danaKlim',
                 pass: 'dana123'
             });
             expect(response.statusCode).toBe(400);
