@@ -1,10 +1,10 @@
 const {checkFarIsValid} = require("../domain/far_domain");
 const far_utils = require("../utils/far_utils");
-jest.mock('', () => jest.fn());
 
+//mocking far_utils.checkIfFarIsValid
 far_utils.checkIfFarIsValid = jest.fn(async (userId) => { 
-        console.log("ascascasc")
-        var far = {0:2}
+        var far = {0:2} //fake DB.
+
         if(userId === undefined){
             return false;
         }    
@@ -14,7 +14,7 @@ far_utils.checkIfFarIsValid = jest.fn(async (userId) => {
         if(userId != refereeId){
             return false;
         }
-    
+        console.log("mocking");
         return true;
     })
 
