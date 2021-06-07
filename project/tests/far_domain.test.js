@@ -1,6 +1,6 @@
 const {checkFarIsValid} = require("../domain/far_domain");
 const far_utils = require("../utils/far_utils");
-jest.mock('../utils/__mocks__/far_utils', () => jest.fn());
+jest.mock('', () => jest.fn());
 
 far_utils.checkIfFarIsValid = jest.fn(async (userId) => { 
         console.log("ascascasc")
