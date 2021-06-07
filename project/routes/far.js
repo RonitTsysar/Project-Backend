@@ -118,14 +118,13 @@ router.post("/addReferee", async (req, res, next) => {
 
 router.use("/scheduleReferee", async (req, res, next) => {
     try{
-        isValidRef = await referee_domain.checkIsValidReferee(req.body.refereeId);
-        isValidMatch = await matches_domain.checkIsValidMatch(req.body.matchId);
-
-        if (isValidRef && isValidMatch) {
+        
+        if(!checkValidParamsScheduleReferee(req.body)){
+            throw {status: 400, message: "Bad Request. Wrong Input Parameters"};
+        }
+        
+        if(referee_domain.scheduleValidation(req)) {
             next();
-        } 
-        else {
-            throw{status: 500, message: "refereeId does not exist or matchId does not exist"}
         }
     } catch(error){
         next(error);
@@ -134,10 +133,7 @@ router.use("/scheduleReferee", async (req, res, next) => {
 
 router.post("/scheduleReferee", async (req, res, next) => {
     try {
-        if(!checkValidParamsScheduleReferee(req.body)){
-            throw {status: 400, message: "Bad Request. Wrong Input Parameters"};
-        }
-        
+
         const{refereeId, matchId} = req.body
         await matches_domain.assignReferee(matchId, refereeId);
         res.status(200).send("referee successfully assigned to a match");
