@@ -1,3 +1,4 @@
+jest.mock('../utils/__mocks__/matches_utils');
 const matches_domain = require("../domain/matches_domain");
 
 // *****************************************UNIT TESTING - MATCHES ASSIGNMENT USE CASE 10 *******************************************************
