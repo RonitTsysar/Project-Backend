@@ -5,15 +5,14 @@ async function checkIfFarIsValid(userId){
         return false;
     }
 
-    const referee = await DButils.execQuery(
+    const far = await DButils.execQuery(
         // `select ifnull((select refereeId from referees where refereeId=${userId}), No Result Found)`
         `select * from FARs where FARId=${userId}`
     )
-    if(referee[0] === undefined){
+    if(far[0] === undefined){
         return false;
     }
 
     return true;
 } 
-
 exports.checkIfFarIsValid = checkIfFarIsValid

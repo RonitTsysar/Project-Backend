@@ -57,8 +57,8 @@ router.post("/addMatch", async (req, res, next) => {
 /*
 request should contain:
 {leagueId:271,
-season:'2017/2018',
-policy: {numOfRounds: 10}}
+season:'2020/2021',
+policy: {numOfRounds: 5}}
 
 add route to api and delete /far/addMatch route
 */
@@ -81,7 +81,7 @@ router.post("/matchAssignmentAlgorithm", async (req, res, next) => {
             throw{status: 409,message: "2 teams of the same league are required in the DB."}
         }
 
-        await matches_domain.assignMatches(req.body.leagueId, req.body.season, req.body.policy.numOfRounds);
+        const matches = await matches_domain.assignMatches(req.body.leagueId, req.body.season, req.body.policy.numOfRounds);
         res.status(200).send("Matches table created");
 
     } catch(error){
@@ -110,7 +110,7 @@ router.post("/addReferee", async (req, res, next) => {
                 qualification: qualification
             }
         )
-        res.status(200).send(result);
+        res.status(201).send(result);
     } catch (error) {
         next(error);
       }
@@ -148,20 +148,20 @@ router.post("/scheduleReferee", async (req, res, next) => {
 })
 
 function checkValidParamsAddReferee(body){
-    if (!('username' in body)){return false;}
-    if (!('firstname' in body)){return false;}
-    if (!('lastname' in body)){return false;}
-    if (!('country' in body)){return false;}
-    if (!('password' in body)){return false;}
-    if (!('email' in body)){return false;}
-    if (!('image_url' in body)){return false;}
-    if (!('qualification' in body)){return false;}
+    if (!'username' in body){return false;}
+    if (!'firstname' in body){return false;}
+    if (!'lastname' in body){return false;}
+    if (!'country' in body){return false;}
+    if (!'password' in body){return false;}
+    if (!'email' in body){return false;}
+    if (!'image_url' in body){return false;}
+    if (!'qualification' in body){return false;}
     return true;
 }
 
 function checkValidParamsScheduleReferee(body){
-    if (!('refereeId' in body)){return false;}
-    if (!('matchId' in body)){return false;}
+    if (!'refereeId' in body){return false;}
+    if (!'matchId' in body){return false;}
     return true;
 }
 module.exports = router;
