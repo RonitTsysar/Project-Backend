@@ -51,6 +51,11 @@ async function checkSufficientTeamsUtils(leagueId){
     `SELECT COUNT(teamId) from teams where teams.leagueId=${leagueId}`)
 }
 
+async function checkIfValidSeason(season){
+  return await DButils.execQuery(
+    `SELECT COUNT(matchId) from matches where matches.season=N'${season}'`)
+}
+
 async function getValidTeamsByLeagueId(leagueId){
   return await DButils.execQuery(
     `SELECT name from teams where teams.leagueId=${leagueId}`)
@@ -98,3 +103,4 @@ exports.getMatchEventByMatch = getMatchEventByMatch;
 exports.getAllMatchesByIds = getAllMatchesByIds;
 exports.checkSufficientTeamsUtils = checkSufficientTeamsUtils;
 exports.getValidTeamsByLeagueId = getValidTeamsByLeagueId;
+exports.checkIfValidSeason = checkIfValidSeason;
