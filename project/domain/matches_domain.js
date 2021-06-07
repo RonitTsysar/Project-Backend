@@ -23,7 +23,6 @@ async function assignMatches(leagueId, season, numOfRounds){
         const dates = makeDates(numOfRounds, year, amountOfMatchesEachRound, amountOfMatchesEachDay);
         let matches = [];
         let isReferees = true;
-        let refereeId = 1;
 
         if(refereesIds.length == 0){
             isReferees = false
@@ -38,7 +37,7 @@ async function assignMatches(leagueId, season, numOfRounds){
                             hostTeam: teamPairs[i % teamPairs.length][0], 
                             guestTeam: teamPairs[i % teamPairs.length][1], 
                             stadium: stadiums[i % stadiums.length], 
-                            refereeId: isReferees ? refereesIds[i % refereesIds.length].refereeId : refereeId
+                            refereeId: isReferees ? refereesIds[i % refereesIds.length].refereeId : null
                         }
             matches.push(match)
         }
@@ -101,7 +100,7 @@ function makePairs(validTeams){
 games start time: 14:00 to 20:00.
 if passed, 20:00, the game will move to the next day.
 each stage will be a week a part.
-no team will play twicw a day.
+no team will play twice a day.
 */
 function makeDates(numOfRounds, year, numOfMatchesEachRound, amountOfMatchesEachDay){
     let dates = [];

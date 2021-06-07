@@ -17,7 +17,7 @@ describe("POST /far/matchAssignmentAlgorithm", () =>{
             expect(response.statusCode).toBe(200);
         }, 30000)
 
-        test("user does not have FAR privileges. reponse status code of 500", async () => {
+        test("user does not have FAR privileges.", async () => {
             response = await farUser.post("/far/matchAssignmentAlgorithm").send({
                 leagueId:217,
                 season:'2017/2018',
@@ -52,8 +52,7 @@ describe("POST /far/matchAssignmentAlgorithm", () =>{
                 policy: {}
             });
             expect(response.statusCode).toBe(400);
-        }, 30000)
-    
+        }, 30000);    
 })
 })
 
