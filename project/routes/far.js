@@ -133,7 +133,6 @@ router.use("/scheduleReferee", async (req, res, next) => {
 
 router.post("/scheduleReferee", async (req, res, next) => {
     try {
-
         const{refereeId, matchId} = req.body
         await matches_domain.assignReferee(matchId, refereeId);
         res.status(200).send("referee successfully assigned to a match");
