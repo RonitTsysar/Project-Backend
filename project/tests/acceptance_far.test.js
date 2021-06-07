@@ -52,8 +52,7 @@ describe("POST /far/matchAssignmentAlgorithm", () =>{
                 policy: {}
             });
             expect(response.statusCode).toBe(400);
-        }, 30000)
-    
+        }, 30000);    
 })
 })
 
