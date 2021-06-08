@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../main')
-var user = request.agent('http://localhost:3000');
+var user = request.agent(app);
 require("dotenv").config();
 
 

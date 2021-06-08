@@ -123,7 +123,6 @@ router.post("/addReferee", async (req, res, next) => {
 
 router.use("/scheduleReferee", async (req, res, next) => {
     try{
-        
         if(!checkValidParamsScheduleReferee(req.body)){
             throw {status: 400, message: "Bad Request. Wrong Input Parameters"};
         }

@@ -90,9 +90,12 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500).send(err.message);
 });
 
-const server = app.listen(port, () => {
-  console.log(`Server listen on port ${port}`);
-});
+let server = null;
+if (process.env.NODE_ENV !== "test") {
+    server = app.listen(port, () => {
+    console.log(`Server listen on port ${port}`);
+  });
+}
 
 process.on("SIGINT", function () {
   if (server) {
