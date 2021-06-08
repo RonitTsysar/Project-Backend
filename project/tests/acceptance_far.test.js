@@ -5,76 +5,76 @@ require("dotenv").config();
 
 // *****************************************ACCEPTANCE TESTING - MATCHES ASSIGNMENT USE CASE 10 *******************************************************
 
-describe("POST /far/matchAssignmentAlgorithm", () =>{
+// describe("POST /far/matchAssignmentAlgorithm", () =>{
 
-    describe("request body does not contain all args.", () => {
+//     describe("request body does not contain all args.", () => {
 
-        test("login NOT a far user.", async () => {
-            response = await farUser.post("/Login").send({
-                username: 'danaKlim',
-                password: 'dana123'
-            });
-            expect(response.statusCode).toBe(200);
-        }, 30000)
+//         test("login NOT a far user.", async () => {
+//             response = await farUser.post("/Login").send({
+//                 username: 'danaKlim',
+//                 password: 'dana123'
+//             });
+//             expect(response.statusCode).toBe(200);
+//         }, 30000)
 
-        test("user does not have FAR privileges.", async () => {
-            response = await farUser.post("/far/matchAssignmentAlgorithm").send({
-                leagueId:271,
-                season:'2017/2018',
-                policy: {numOfRounds: 10}
-            });
-            expect(response.statusCode).toBe(401)
-        }, 30000)
-    })
+//         test("user does not have FAR privileges.", async () => {
+//             response = await farUser.post("/far/matchAssignmentAlgorithm").send({
+//                 leagueId:271,
+//                 season:'2017/2018',
+//                 policy: {numOfRounds: 10}
+//             });
+//             expect(response.statusCode).toBe(401)
+//         }, 30000)
+//     })
 
-    describe("request body does not contain all args. far user is authenticated", () => {
+//     describe("request body does not contain all args. far user is authenticated", () => {
 
-        test("login a far user.", async () => {
-            response = await farUser.post("/Login").send({
-                username: 'ladygaga',
-                password: 'lady@56'
-            });
-            expect(response.statusCode).toBe(200);
-        }, 30000)
+//         test("login a far user.", async () => {
+//             response = await farUser.post("/Login").send({
+//                 username: 'ladygaga',
+//                 password: 'lady@56'
+//             });
+//             expect(response.statusCode).toBe(200);
+//         }, 30000)
 
-        test("request body does not contain LEAGUEID. reponse status code of 400.", async () => {      
-            response = await farUser.post("/far/matchAssignmentAlgorithm").send({
-                season:'2017/2018',
-                policy: {numOfRounds: 10}
-            });
-            expect(response.statusCode).toBe(400);
-        }, 30000)
+//         test("request body does not contain LEAGUEID. reponse status code of 400.", async () => {      
+//             response = await farUser.post("/far/matchAssignmentAlgorithm").send({
+//                 season:'2017/2018',
+//                 policy: {numOfRounds: 10}
+//             });
+//             expect(response.statusCode).toBe(400);
+//         }, 30000)
 
-        test("request body does not contain policy.numOfRounds. reponse status code of 400.", async () => {
-            response = await farUser.post("/far/matchAssignmentAlgorithm").send({
-                leagueId:271,
-                season:'2017/2018',
-                policy: {}
-            });
-            expect(response.statusCode).toBe(400);
-        }, 30000);    
-    })
+//         test("request body does not contain policy.numOfRounds. reponse status code of 400.", async () => {
+//             response = await farUser.post("/far/matchAssignmentAlgorithm").send({
+//                 leagueId:271,
+//                 season:'2017/2018',
+//                 policy: {}
+//             });
+//             expect(response.statusCode).toBe(400);
+//         }, 30000);    
+//     })
 
-    describe("correct request body, correct FAR userId", () => {
+//     describe("correct request body, correct FAR userId", () => {
 
-        test("login a far user.", async () => {
-            response = await farUser.post("/Login").send({
-                username: 'ladygaga',
-                password: 'lady@56'
-            });
-            expect(response.statusCode).toBe(200);
-        }, 30000)})
+//         test("login a far user.", async () => {
+//             response = await farUser.post("/Login").send({
+//                 username: 'ladygaga',
+//                 password: 'lady@56'
+//             });
+//             expect(response.statusCode).toBe(200);
+//         }, 30000)})
 
-        test("success. reponse status code of 200.", async () => {      
-            response = await farUser.post("/far/matchAssignmentAlgorithm").send({
-                leagueId:217,
-                season:'2021/2022',
-                policy: {numOfRounds: 5}
-            });
-            expect(response.statusCode).toBe(200);
-        }, 30000)
+//         test("success. reponse status code of 200.", async () => {      
+//             response = await farUser.post("/far/matchAssignmentAlgorithm").send({
+//                 leagueId:217,
+//                 season:'2021/2022',
+//                 policy: {numOfRounds: 5}
+//             });
+//             expect(response.statusCode).toBe(200);
+//         }, 30000)
 
-})
+// })
 
 // *****************************************ACCEPTANCE TESTING - REFEREES ASSIGNMENT USE CASE 5 *******************************************************
 
@@ -153,21 +153,20 @@ describe("POST /far/addReferee", () =>{
 })
 
 // TODO - check AND CHANGE refereeId before running the tests
-// describe("POST /far/scheduleReferee", () =>{ 
+describe("POST /far/scheduleReferee", () =>{ 
 
-//     test("login as a far.", async () => {
-//         response = await farUser.post("/Login").send({
-//             username: 'ladygaga',
-//             password: 'lady@56'
-//         });
-//         expect(response.statusCode).toBe(200);
-//     }, 30000)
-
-//     test("valid request structure", async () => {
-//         response = await farUser.post("/far/scheduleReferee").send({
-//             "refereeId": 27,
-//             "matchId": 70
-//         });
-//         expect(response.statusCode).toBe(200)
-//     }, 30000)
-// })
+    test("login as a far.", async () => {
+        response = await farUser.post("/Login").send({
+            username: 'ladygaga',
+            password: 'lady@56'
+        });
+        expect(response.statusCode).toBe(200);
+    }, 30000)
+    test("valid request structure", async () => {
+        response = await farUser.post("/far/scheduleReferee").send({
+            "refereeId": 40,
+            "matchId": 70
+        });
+        expect(response.statusCode).toBe(200)
+    }, 30000)
+})
