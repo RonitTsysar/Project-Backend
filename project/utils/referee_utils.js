@@ -2,6 +2,14 @@ const DButils = require("./DButils");
 
 async function addRefereeToDB(referee){
     try {
+
+      const referees = await DButils.execQuery(
+        "SELECT refereeId FROM dbo.referees;"
+      );
+  
+      if (referees.find((x) => x.refereeId === referee.refereeId))
+        throw { status: 409, message: "refereeId already exist" };
+
         await DButils.execQuery(
             `INSERT INTO dbo.referees (refereeId, qualification) 
              VALUES 

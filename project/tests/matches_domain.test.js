@@ -26,7 +26,42 @@ matches_utils.checkIfValidSeason = jest.fn(async (season) => {
     return {0:{'':0}};
 })
 
-// *****************************************UNIT TESTING - MATCHES ASSIGNMENT USE CASE 10 *******************************************************
+matches_utils.checkIsValidMatch = jest.fn(async (matchId) => {
+    if(matchId === undefined){
+        return false;
+    }
+    matches = [{matchId:1}, {matchId:2}]
+
+    const match = [matches.find(x => x.matchId === matchId)];
+
+    if(match[0] === undefined){
+        return false;
+    }
+    return true;
+})
+
+// *****************************************UNIT TESTING - MATCHES ASSIGNMENT USE CASE 10 AND 5*******************************************************
+
+test('Check if existed matchId exsit', async () => {  
+    const matchId = 1; 
+    
+    const isValid = await matches_domain.checkIsValidMatch(matchId);
+    expect(isValid).toBe(true);
+});
+
+test('Check if wrong matchId not exsit', async () => {  
+    const matchId = 0; 
+    
+    const isValid = await matches_domain.checkIsValidMatch(matchId);
+    expect(isValid).toBe(false);
+});
+
+test('Check if undefined matchId not exsit', async () => {  
+    const matchId = undefined; 
+    
+    const isValid = await matches_domain.checkIsValidMatch(matchId);
+    expect(isValid).toBe(false);
+});
 
 test('Check if number of teams of a WRONG league id is GE to 2 OR, an even amount of teams exist. ', async () => {   
     const leagueId = -1; 
@@ -71,4 +106,3 @@ function factorial(num){
 
     return num * factorial(num - 1);
 }
-
