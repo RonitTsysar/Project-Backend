@@ -153,21 +153,20 @@ describe("POST /far/addReferee", () =>{
 })
 
 // TODO - check AND CHANGE refereeId before running the tests
-// describe("POST /far/scheduleReferee", () =>{ 
+describe("POST /far/scheduleReferee", () =>{ 
 
-//     test("login as a far.", async () => {
-//         response = await farUser.post("/Login").send({
-//             username: 'ladygaga',
-//             password: 'lady@56'
-//         });
-//         expect(response.statusCode).toBe(200);
-//     }, 30000)
-
-//     test("valid request structure", async () => {
-//         response = await farUser.post("/far/scheduleReferee").send({
-//             "refereeId": 27,
-//             "matchId": 70
-//         });
-//         expect(response.statusCode).toBe(200)
-//     }, 30000)
-// })
+    test("login as a far.", async () => {
+        response = await farUser.post("/Login").send({
+            username: 'ladygaga',
+            password: 'lady@56'
+        });
+        expect(response.statusCode).toBe(200);
+    }, 30000)
+    test("valid request structure", async () => {
+        response = await farUser.post("/far/scheduleReferee").send({
+            "refereeId": 40,
+            "matchId": 70
+        });
+        expect(response.statusCode).toBe(200)
+    }, 30000)
+})

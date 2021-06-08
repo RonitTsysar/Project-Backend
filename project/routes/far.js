@@ -115,7 +115,7 @@ router.post("/addReferee", async (req, res, next) => {
                 qualification: qualification
             }
         )
-        res.status(201).send(result);
+        res.status(200).send(result);
     } catch (error) {
         next(error);
       }
@@ -148,20 +148,20 @@ router.post("/scheduleReferee", async (req, res, next) => {
 })
 
 function checkValidParamsAddReferee(body){
-    if (!'username' in body){return false;}
-    if (!'firstname' in body){return false;}
-    if (!'lastname' in body){return false;}
-    if (!'country' in body){return false;}
-    if (!'password' in body){return false;}
-    if (!'email' in body){return false;}
-    if (!'image_url' in body){return false;}
-    if (!'qualification' in body){return false;}
+    if (!('username' in body)){return false;}
+    if (!('firstname' in body)){return false;}
+    if (!('lastname' in body)){return false;}
+    if (!('country' in body)){return false;}
+    if (!('password' in body)){return false;}
+    if (!('email' in body)){return false;}
+    if (!('image_url' in body)){return false;}
+    if (!('qualification' in body)){return false;}
     return true;
 }
 
 function checkValidParamsScheduleReferee(body){
-    if (!'refereeId' in body){return false;}
-    if (!'matchId' in body){return false;}
+    if (!('refereeId' in body)){return false;}
+    if (!('matchId' in body)){return false;}
     return true;
 }
 module.exports = router;

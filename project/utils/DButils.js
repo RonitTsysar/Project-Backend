@@ -46,7 +46,7 @@ exports.execQuery = function (query) {
         return pool.request().query(query);
       })
       .then((result) => {
-        sql.close();
+        //sql.close();  ////////////////
         resolve(result.recordsets[0]);
       })
       .catch((err) => {
