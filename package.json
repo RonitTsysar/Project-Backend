@@ -20,7 +20,7 @@
     "supertest": "^6.1.3"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose --forceExit --watchAll --maxWorkers=1",
     "start": "nodemon project/main.js"
   },
   "repository": {
