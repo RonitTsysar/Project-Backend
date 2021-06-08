@@ -20,39 +20,6 @@ auth_utils.getUser = jest.fn(async (username)=>{
     return user;
 })
 
-// *****************************************UNIT TESTING - MATCHES ASSIGNMENT USE CASE 2 - LOGIN *******************************************************
-
-// CHECK : with all group members -> Utils tests - if needed? Else-> DELETE !!!!!
-
-// test('Check a successful get from DB of a registered user', async () => {
-//     // let userName = "danaKlim";
-//     // const user = await auth_utils.getUser(userName);
-//     // let expectedUser = {
-//     //     userId: 1,
-//     //     username: 'danaKlim',
-//     //     firstname: 'Dana',
-//     //     lastname: 'Klimenko',
-//     //     country: 'Israel',
-//     //     password: '$2a$13$zzB3Oo9FDGNy6Ig4wzKojefBrp9II2vpRnkZaekGpZQSFI9tk2ROG',
-//     //     email: 'danaklim@gmail.com',
-//     //     image: 'undefined'
-//     // };
-//     // expect(user).toEqual(expectedUser);
-    
-//     // let userName = "danaKlim";
-//     // const user = await auth_utils.getUser(userName);
-
-
-// });
-
-// test('Check a successful get from DB of a registered user', async () => {
-//     let userName = "danaKlm";
-//     const user = await auth_utils.getUser(userName);
-//     expect(user).toBeUndefined();
-// });
-
-
-
 // ***************************************** UNIT TESTING - MATCHES ASSIGNMENT USE CASE 2 - LOGIN *******************************************************
 
 test('Check a valid login of a user', async () => {
