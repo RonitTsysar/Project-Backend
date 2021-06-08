@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../main')
-var farUser = request.agent('http://localhost:3000');
+var farUser = request.agent(app);
 require("dotenv").config();
 
 // *****************************************ACCEPTANCE TESTING - MATCHES ASSIGNMENT USE CASE 10 *******************************************************
