@@ -55,15 +55,15 @@ describe("POST /far/matchAssignmentAlgorithm", () =>{
         }, 30000);    
     })
 
-    // describe("correct request body, correct FAR userId", () => {
+    describe("correct request body, correct FAR userId", () => {
 
-    //     test("login a far user.", async () => {
-    //         response = await farUser.post("/Login").send({
-    //             username: 'ladygaga',
-    //             password: 'lady@56'
-    //         });
-    //         expect(response.statusCode).toBe(200);
-    //     }, 30000)})
+        // test("login a far user.", async () => {
+        //     response = await farUser.post("/Login").send({
+        //         username: 'ladygaga',
+        //         password: 'lady@56'
+        //     });
+        //     expect(response.statusCode).toBe(200);
+        // }, 30000)})
 
         // test("success. reponse status code of 200.", async () => {      
         //     response = await farUser.post("/far/matchAssignmentAlgorithm").send({
@@ -80,93 +80,93 @@ describe("POST /far/matchAssignmentAlgorithm", () =>{
 
 /////////// IMPORTANT ////////////
 // TODO - clean the DB before running the tests
-// describe("POST /far/addReferee", () =>{ 
+describe("POST /far/addReferee", () =>{ 
 
-//     test("login as a far.", async () => {
-//         response = await farUser.post("/Login").send({
-//             username: 'ladygaga',
-//             password: 'lady@56'
-//         });
-//         expect(response.statusCode).toBe(200);
-//     }, 30000)
+    test("login as a far.", async () => {
+        response = await farUser.post("/Login").send({
+            username: 'ladygaga',
+            password: 'lady@56'
+        });
+        expect(response.statusCode).toBe(200);
+    }, 30000)
 
-//     test("valid request structure", async () => {
-//         response = await farUser.post("/far/addReferee").send({
-//             username:"nabut",
-//             firstname:"nir",
-//             lastname:"klinger",
-//             country:"israel",
-//             password:"loveGuy",
-//             email:"nirKling@gmail.com",
-//             image_url:"null",
-//             qualification:"basic"
-//         });
-//         expect(response.statusCode).toBe(200)
-//     }, 30000)
+    test("valid request structure", async () => {
+        response = await farUser.post("/far/addReferee").send({
+            username:"nabut",
+            firstname:"nir",
+            lastname:"klinger",
+            country:"israel",
+            password:"loveGuy",
+            email:"nirKling@gmail.com",
+            image_url:"null",
+            qualification:"basic"
+        });
+        expect(response.statusCode).toBe(200)
+    }, 30000)
 
-//     test("invalid request structure", async () => {
-//         response = await farUser.post("/far/addReferee").send({
-//             user:"nabut",
-//             firstname:"nir",
-//             lastname:"klinger",
-//             country:"israel",
-//             password:"loveGuy",
-//             email:"nirKling@gmail.com",
-//             image_url:"null",
-//             qualification:"basic"
-//         });
-//         expect(response.statusCode).toBe(400)
-//     }, 30000)
+    test("invalid request structure", async () => {
+        response = await farUser.post("/far/addReferee").send({
+            user:"nabut",
+            firstname:"nir",
+            lastname:"klinger",
+            country:"israel",
+            password:"loveGuy",
+            email:"nirKling@gmail.com",
+            image_url:"null",
+            qualification:"basic"
+        });
+        expect(response.statusCode).toBe(400)
+    }, 30000)
 
-//     test("taken username", async () => {
-//         response = await farUser.post("/far/addReferee").send({
-//             username:"nabut",
-//             firstname:"roy",
-//             lastname:"dor",
-//             country:"israel",
-//             password:"loveGuy",
-//             email:"nirKling@gmail.com",
-//             image_url:"null",
-//             qualification:"basic"
-//         });
-//         expect(response.statusCode).toBe(409)
-//     }, 30000)
+    test("taken username", async () => {
+        response = await farUser.post("/far/addReferee").send({
+            username:"nabut",
+            firstname:"roy",
+            lastname:"dor",
+            country:"israel",
+            password:"loveGuy",
+            email:"nirKling@gmail.com",
+            image_url:"null",
+            qualification:"basic"
+        });
+        expect(response.statusCode).toBe(409)
+    }, 30000)
 
-//     test("logout.", async () => {
-//         response = await farUser.post("/Logout").send();
-//         expect(response.statusCode).toBe(200);
-//     }, 30000)
+    test("logout.", async () => {
+        response = await farUser.post("/Logout").send();
+        expect(response.statusCode).toBe(200);
+    }, 30000)
 
-//     test("not a FAR", async () => {
-//         response = await farUser.post("/far/addReferee").send({
-//             username:"nabut",
-//             firstname:"roy",
-//             lastname:"dor",
-//             country:"israel",
-//             password:"loveGuy",
-//             email:"nirKling@gmail.com",
-//             image_url:"null",
-//             qualification:"basic"
-//         });
-//         expect(response.statusCode).toBe(401)
-//     }, 30000)
-// })
+    test("not a FAR", async () => {
+        response = await farUser.post("/far/addReferee").send({
+            username:"nabut",
+            firstname:"roy",
+            lastname:"dor",
+            country:"israel",
+            password:"loveGuy",
+            email:"nirKling@gmail.com",
+            image_url:"null",
+            qualification:"basic"
+        });
+        expect(response.statusCode).toBe(401)
+    }, 30000)
+})
 
-// // TODO - check AND CHANGE refereeId before running the tests
-// describe("POST /far/scheduleReferee", () =>{ 
+// TODO - check AND CHANGE refereeId before running the tests
+describe("POST /far/scheduleReferee", () =>{ 
 
-//     test("login as a far.", async () => {
-//         response = await farUser.post("/Login").send({
-//             username: 'ladygaga',
-//             password: 'lady@56'
-//         });
-//         expect(response.statusCode).toBe(200);
-//     }, 30000)
-//     test("valid request structure", async () => {
-//         response = await farUser.post("/far/scheduleReferee").send({
-//             "refereeId": 40,
-//             "matchId": 70
-//         });
-//         expect(response.statusCode).toBe(200)
-//     }, 30000)
-// })
+    test("login as a far.", async () => {
+        response = await farUser.post("/Login").send({
+            username: 'ladygaga',
+            password: 'lady@56'
+        });
+        expect(response.statusCode).toBe(200);
+    }, 30000)
+    test("valid request structure", async () => {
+        response = await farUser.post("/far/scheduleReferee").send({
+            "refereeId": 42,
+            "matchId": 70
+        });
+        expect(response.statusCode).toBe(200)
+    }, 30000)
+})
