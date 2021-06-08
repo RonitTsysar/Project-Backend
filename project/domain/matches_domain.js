@@ -10,6 +10,17 @@ async function checkSufficientTeams(leagueId){
     return true;
 }
 
+async function checkValidSeason(season){
+    const numOfTeams = await matches_utils.checkIfValidSeason(season);
+    let count = numOfTeams['0']['']
+    if (count == 0){
+        return true;
+    }
+    return false;
+}
+
+
+
 //implement match assignment algorithm
 async function assignMatches(leagueId, season, numOfRounds){
     try{    
@@ -150,3 +161,4 @@ exports.checkIsValidMatch = checkIsValidMatch
 exports.assignMatches = assignMatches
 exports.checkSufficientTeams = checkSufficientTeams
 exports.makePairs = makePairs
+exports.checkValidSeason = checkValidSeason

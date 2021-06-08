@@ -76,9 +76,14 @@ router.post("/matchAssignmentAlgorithm", async (req, res, next) => {
             throw{status: 400, message: "policy is expected."}
         }
 
-        const isValid = matches_domain.checkSufficientTeams(req.body.leagueId)
+        let isValid = await matches_domain.checkSufficientTeams(req.body.leagueId)
         if(!isValid){
             throw{status: 409,message: "2 teams of the same league are required in the DB."}
+        }
+
+        isValid = await matches_domain.checkValidSeason(req.body.season)
+        if(!isValid){
+            throw{status: 409,message: "Matches assignment algorithm already been applied on that season."}
         }
 
         const matches = await matches_domain.assignMatches(req.body.leagueId, req.body.season, req.body.policy.numOfRounds);

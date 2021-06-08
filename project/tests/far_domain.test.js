@@ -6,9 +6,11 @@ const users_utils = require("../utils/users_utils");
 const matches_utils = require("../utils/matches_utils");
 // jest.mock('', () => jest.fn());
 
+
+//mocking far_utils.checkIfFarIsValid
 far_utils.checkIfFarIsValid = jest.fn(async (userId) => { 
-        console.log("ascascasc")
-        var far = {0:2}
+        var far = {0:2} //fake DB.
+
         if(userId === undefined){
             return false;
         }    
@@ -18,7 +20,7 @@ far_utils.checkIfFarIsValid = jest.fn(async (userId) => {
         if(userId != refereeId){
             return false;
         }
-    
+        console.log("mocking");
         return true;
     })
 
