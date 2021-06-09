@@ -1,6 +1,8 @@
 const matches_domain = require("../domain/matches_domain");
 const matches_utils = require("../utils/matches_utils");
 
+// *****************************************UNIT TESTING - MATCHES ASSIGNMENT USE CASE 10 AND 5*******************************************************
+
 //mocking matches_utils.checkSufficientTeamsUtils
 matches_utils.checkSufficientTeamsUtils = jest.fn(async (leagueId) => {
     var leaguesTeams = {271: 4,  //fake DB
@@ -39,8 +41,6 @@ matches_utils.checkIsValidMatch = jest.fn(async (matchId) => {
     }
     return true;
 })
-
-// *****************************************UNIT TESTING - MATCHES ASSIGNMENT USE CASE 10 AND 5*******************************************************
 
 test('Check if existed matchId exsit', async () => {  
     const matchId = 1; 
@@ -106,3 +106,22 @@ function factorial(num){
 
     return num * factorial(num - 1);
 }
+
+
+// *****************************************INTEGRATION TESTING - MATCHES ASSIGNMENT USE CASE 10*******************************************************
+test('Check if the number of dates created after applying matches_domain.makeDates() equals (n choose 2)', async () => {    
+    
+    const teams = [{name: "a"},
+    {name: "b"},
+    {name: "c"},
+    {name: "d"},];
+    const matches = matches_domain.makePairs(teams);
+
+    const numOfRounds = 3;
+    const year = 2021;
+    const numOfMatchesEachRound = matches.length;
+    const amountOfMatchesEachDay = teams.length / 2; 
+
+    const dates = matches_domain.makeDates(numOfRounds, year, numOfMatchesEachRound, amountOfMatchesEachDay);
+    expect(matches.length * numOfRounds).toEqual(dates.length);
+});
