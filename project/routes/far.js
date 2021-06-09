@@ -72,8 +72,8 @@ router.post("/matchAssignmentAlgorithm", async (req, res, next) => {
             throw{status: 400,message: "wrong input parameters."}
         }
 
-        if(!('numOfRounds' in req.body.policy)){
-            throw{status: 400, message: "policy is expected."}
+        if(!('numOfRounds' in req.body.policy) || req.body.policy.numOfRounds < 1){
+            throw{status: 400, message: "Correct policy body is expected"}
         }
 
         let isValid = await matches_domain.checkSufficientTeams(req.body.leagueId)

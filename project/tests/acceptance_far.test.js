@@ -193,7 +193,7 @@ describe("POST /far/scheduleReferee", () =>{
     }, 30000)
     test("valid request structure", async () => {
         response = await farUser.post("/far/scheduleReferee").send({
-            "refereeId": 44,
+            "refereeId": 45,
             "matchId": 70
         });
         expect(response.statusCode).toBe(200)
