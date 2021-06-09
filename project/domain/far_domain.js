@@ -7,7 +7,7 @@ async function checkFarIsValid(userId){
     //chek if farId in FAR table
         return await far_utils.checkIfFarIsValid(userId)
 }
-
+// not relevant
 async function addMatch(match){    
     match_utils.addMatchToDB(match)
 }
