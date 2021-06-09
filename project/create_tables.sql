@@ -168,3 +168,8 @@
 
 -- SELECT * FROM matches
 -- ORDER BY stage;
+
+-- SELECT * FROM users;
+-- SELECT * FROM referees;
+-- DELETE FROM referees WHERE qualification='basic';
+-- DELETE FROM users WHERE userId=43;

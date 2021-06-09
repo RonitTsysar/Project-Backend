@@ -48,7 +48,7 @@ async function assignMatches(leagueId, season, numOfRounds){
                             hostTeam: teamPairs[i % teamPairs.length][0], 
                             guestTeam: teamPairs[i % teamPairs.length][1], 
                             stadium: stadiums[i % stadiums.length], 
-                            refereeId: isReferees ? refereesIds[i % refereesIds.length].refereeId : null
+                            refereeId: isReferees ? refereesIds[i % refereesIds.length].refereeId : -1
                         }
             matches.push(match)
         }
@@ -161,4 +161,5 @@ exports.checkIsValidMatch = checkIsValidMatch
 exports.assignMatches = assignMatches
 exports.checkSufficientTeams = checkSufficientTeams
 exports.makePairs = makePairs
+exports.makeDates = makeDates
 exports.checkValidSeason = checkValidSeason
